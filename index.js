@@ -1,13 +1,19 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const cors = require('@koa/cors');
 
 const app = new Koa();
 const router = new Router();
+let corsOptions = {
+    origin: process.env.CLIENT_HOST,
+    credentials: true
+}
+
 const tables = require('./api/table');
 
 router.use('/api', tables.routes());
-
-app.use(router.routes()).use(router.allowedMethods());
+app.proxy = true;
+app.use(router.routes()).use(router.allowedMethods()).use(cors(corsOptions));
 app.listen((process.env.PORT || 5000), () => {
     console.log((process.env.PORT || 5000));
 });
