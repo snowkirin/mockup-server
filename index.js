@@ -8,8 +8,8 @@ const tables = require('./api/table');
 router.use('/api', tables.routes());
 
 app.use(router.routes()).use(router.allowedMethods());
-app.listen(3000, () => {
-    console.log('server port 3000');
+app.listen((process.env.PORT || 5000), () => {
+    console.log((process.env.PORT || 5000));
 });
 
 
