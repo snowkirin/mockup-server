@@ -1,13 +1,16 @@
-// express => koa 로 변경
-
 const Koa = require('koa');
+const Router = require('koa-router');
+
 const app = new Koa();
+const router = new Router();
+const tables = require('./api/table');
 
-app.use(async ctx => {
-    ctx.body = '안녕. 세상';
+router.use('/api', tables.routes());
+
+app.use(router.routes()).use(router.allowedMethods());
+app.listen(3000, () => {
+    console.log('server port 3000');
 });
-
-app.listen(3000);
 
 
 
