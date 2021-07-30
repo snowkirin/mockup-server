@@ -6,7 +6,9 @@ const app = new Koa();
 const router = new Router();
 let corsOptions = {
     origin: process.env.CLIENT_HOST,
-    credentials: true
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }
 
 const tables = require('./api/table');
